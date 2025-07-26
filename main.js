@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain } = require('electron');
+const { app, BrowserWindow, ipcMain, shell } = require("electron");
 const path = require('path');
 const controller = require('./keyController');
 
@@ -21,3 +21,8 @@ ipcMain.handle('press-keys', (_, keys, duration) => {
 });
 
 app.whenReady().then(createWindow);
+
+// 外部ブラウザでURLを開く
+ipcMain.handle("open-external", (event, url) => {
+  shell.openExternal(url);
+});
