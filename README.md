@@ -19,15 +19,15 @@ Webブラウザ型のメタバースでは、[Spatial](https://www.spatial.io/)�
 
 # インストール手順
 ## Windows 11 環境の場合
-(1) ソースコードを取得します。
+### (1) ソースコードを取得します。
 ```
 git clone https://github.com/kolinz/metaverse-key-supporter.git
 ```
-(2) metaverse-key-supporterディレクトリに移動します。
+### (2) metaverse-key-supporterディレクトリに移動します。
 ```
 cd metaverse-key-supporter
 ```
-(3) 下記のコマンドを実行します。
+### (3) 下記のコマンドを実行します。
 初回の起動は次のように実行します。
 ```
 npm install
@@ -38,6 +38,45 @@ npm start
 ```
 npm start
 ```
+## Windows 11 向けに実行形式ファイル（.exe）にパッケージ化する手順
+配布する場合は、実行形式ファイルにパッケージ化する必要があるので、手順を示します。
+metaverse-key-supporter ディレクトリ（フォルダ）にいる前提で説明します。
+
+### (1) electron-packagerのインストール
+```
+npm install --save-dev electron-packager
+```
+### (2) [package.json](https://github.com/kolinz/metaverse-key-supporter/blob/main/package.json)を編集
+下記のように編集します。
+```
+{
+  "name": "metaverse-key-supporter",
+  "version": "1.0.0",
+  "description": "キーボード操作が苦手な人のメタバース操作を助けるElectronアプリ",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "package": "electron-packager . metaverse-key-supporter --platform=win32 --arch=x64 --out=dist --overwrite --icon=mksicon.ico"
+  },
+  "devDependencies": {
+    "electron": "^29.0.0",
+    "electron-packager": "^17.1.1"
+  },
+  "dependencies": {
+    "robotjs": "^0.6.0"
+  }
+}
+```
+### (3) パッケージ化
+次のコマンドを実行します。
+```
+npm run package
+```
+実行後、「dist」ディレクトリ（フォルダ）の下に、「metaverse-key-supporter-win32-x64」ディレクトリ（フォルダ）が作成され、そのなかに「metaverse-key-supporter.exe」が入っています。
+
+### (4) 動作確認と配布
+「metaverse-key-supporter.exe」をダブルクリックすると、アプリが起動します。
+「metaverse-key-supporter-win32-x64」ディレクトリ（フォルダ）を、Zip形式などに圧縮して、配布するようにしましょう。
 
 # 使い方
 準備中
