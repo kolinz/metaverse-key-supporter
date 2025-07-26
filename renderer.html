@@ -79,6 +79,7 @@
     <label for="urlInput">🌐 メタバースURL指定</label>
     <input id="urlInput" type="text" value="https://cloud.vket.com/" />
     <button onclick="loadURL()">読み込み</button>
+    <button onclick="openInBrowser()">🌐 外部ブラウザで開く</button>
   </div>
 
   <!-- ✅ メタバースビュー -->
@@ -159,6 +160,11 @@
         current.push(key);
         input.value = current.join(', ');
       }
+    }
+
+    function openInBrowser() {
+      const url = document.getElementById("urlInput").value;
+      window.electronAPI.openExternal(url);
     }
   </script>
 </body>
