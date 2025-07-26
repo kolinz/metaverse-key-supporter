@@ -88,4 +88,5 @@ npm run package
 
 ## デモ動画
 下記をクリックすると、動画が表示されます。
+
 [![デモ動画です。サムネイルをクリックしてください。](http://img.youtube.com/vi/xN5Kdw5lhNs/0.jpg)](https://www.youtube.com/watch?v=xN5Kdw5lhNs)
