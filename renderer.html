@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Metaverse Key Supporter</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 20px;
+    }
+    iframe {
+      width: 100%;
+      height: 500px;
+      margin-top: 10px;
+      border: 1px solid #ccc;
+    }
+    input, button {
+      margin: 5px;
+      padding: 5px;
+      font-size: 16px;
+    }
+
+    .url-bar {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 15px;
+    }
+
+    .url-bar label {
+      font-weight: bold;
+      white-space: nowrap;
+    }
+
+    .url-bar input[type="text"] {
+      flex: 1;
+      min-width: 250px;
+      padding: 5px;
+    }
+
+    .controls {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-top: 10px;
+      flex-wrap: wrap;
+    }
+
+    .key-control {
+      flex: 1 1 400px;
+    }
+
+    .quick-keys {
+      flex: 1 1 400px;
+      max-width: 500px;
+    }
+
+    .quick-keys button,
+    .quick-seconds button {
+      margin: 4px;
+      padding: 8px 12px;
+      font-size: 16px;
+      border-radius: 4px;
+      border: 1px solid #888;
+      background-color: #f0f0f0;
+      cursor: pointer;
+    }
+
+    .quick-keys button:hover,
+    .quick-seconds button:hover {
+      background-color: #ddd;
+    }
+  </style>
+</head>
+<body>
+  <!-- ✅ メタバースURL入力（横並び） -->
+  <div class="url-bar">
+    <label for="urlInput">🌐 メタバースURL指定</label>
+    <input id="urlInput" type="text" value="https://spatial.io/" />
+    <button onclick="loadURL()">読み込み</button>
+  </div>
+
+  <!-- ✅ メタバースビュー -->
+  <iframe id="webview" sandbox="allow-scripts allow-same-origin allow-forms allow-popups"></iframe>
+
+  <!-- ✅ キー操作＆ショートカット -->
+  <div class="controls">
+    <!-- 左：キー入力・秒数・送信 -->
+    <div class="key-control">
+      <h3>⌨️ キー操作（押下 → 指定秒後に解放）</h3>
+
+      <label>キー名（カンマ区切り）：</label>
+      <input type="text" id="keyInput" placeholder="例: space, w"><br>
+
+      <label>秒数：</label>
+      <input type="number" id="durationInput" value="3" min="0.1" step="0.1"><br>
+
+      <div class="quick-seconds">
+        <strong>秒数を選ぶ：</strong>
+        <button onclick="setDuration(1)">1秒</button>
+        <button onclick="setDuration(2)">2秒</button>
+        <button onclick="setDuration(3)">3秒</button>
+      </div>
+
+      <button onclick="sendKeys()">送信</button>
+      <button onclick="clearInputs()">リセット</button>
+    </div>
+
+    <!-- 右：よく使うキー -->
+    <div class="quick-keys">
+      <h3>🧩 よく使うキー</h3>
+      <button onclick="addKey('w')">w</button>
+      <button onclick="addKey('s')">s</button>
+      <button onclick="addKey('a')">a</button>
+      <button onclick="addKey('d')">d</button>
+      <button onclick="addKey('space')">space</button>
+      <button onclick="addKey('right')">right</button>
+      <button onclick="addKey('left')">left</button>
+      <button onclick="addKey('up')">up</button>
+      <button onclick="addKey('down')">down</button>
+    </div>
+  </div>
+
+  <!-- ✅ 操作ロジック -->
+  <script>
+    function loadURL() {
+      const url = document.getElementById("urlInput").value;
+      document.getElementById("webview").src = url;
+    }
+
+    function sendKeys() {
+      const raw = document.getElementById('keyInput').value;
+      const duration = parseFloat(document.getElementById('durationInput').value);
+      const keys = raw.split(',')
+                      .map(s => s.trim().toLowerCase())
+                      .filter(k => k.length > 0);
+
+      if (keys.length && duration > 0) {
+        window.keyAPI.pressKeys(keys, duration);
+      } else {
+        alert("正しいキーと秒数を入力してください。");
+      }
+    }
+
+    function clearInputs() {
+      document.getElementById('keyInput').value = '';
+      document.getElementById('durationInput').value = '';
+    }
+
+    function setDuration(seconds) {
+      document.getElementById('durationInput').value = seconds;
+    }
+
+    function addKey(key) {
+      const input = document.getElementById('keyInput');
+      let current = input.value.split(',').map(k => k.trim().toLowerCase()).filter(k => k);
+      if (!current.includes(key)) {
+        current.push(key);
+        input.value = current.join(', ');
+      }
+    }
+  </script>
+</body>
+</html>
