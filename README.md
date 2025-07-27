@@ -1,7 +1,10 @@
 # metaverse-key-supporter
 このツールは、Webブラウザ接続型のメタバースを、キーボード操作なしに操作するためのものです。おそらく視線入力装置でも使えるものかと思います。手元に視線入力装置がないので....。
 
-Webブラウザ型のメタバースでは、[Spatial](https://www.spatial.io/)と[Vket Cloud](https://cloud.vket.com/ja)で動作確認済みです。
+Webブラウザ型のメタバースでは、以下で動作確認済みです。
+- [Spatial](https://www.spatial.io/)
+- [Vket Cloud](https://cloud.vket.com/ja)
+- [Roomiq](https://roomiq.jp/) <<一部制限あり。スペースキーが動作しない
 
 ## 今後やること / やりたいこと
  - [ ] 英語UIの追加
