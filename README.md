@@ -76,7 +76,7 @@ npm install --save-dev electron-packager
     "package": "electron-packager . metaverse-key-supporter --platform=win32 --arch=x64 --out=dist --overwrite --icon=mksicon.ico"
   },
   "devDependencies": {
-    "electron": "^29.0.0",
+    "electron": "^34.0.0",
     "electron-packager": "^17.1.1"
   },
   "dependencies": {
